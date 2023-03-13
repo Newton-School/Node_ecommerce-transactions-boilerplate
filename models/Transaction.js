@@ -8,35 +8,11 @@ The createTransaction method should be called within a session to ensure atomici
 */
 
 const transactionSchema = new mongoose.Schema({
-  order: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Order',
-    required: true
-  },
-  paymentMethod: {
-    type: String,
-    required: true
-  },
-  amount: {
-    type: Number,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
+  // Write your code here
 });
 
 transactionSchema.statics.createTransaction = async function (order, paymentMethod, amount, session) {
-  const Transaction = this;
-
-  const transaction = new Transaction({
-    order,
-    paymentMethod,
-    amount
-  });
-
-  return transaction.save({ session });
+  //Write your code here
 };
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
