@@ -45,41 +45,11 @@ const createTransaction = async (req, res) => {
             status: "Error"
         });
     }
-
-    const session = await mongoose.startSession();
+    
+    // start a session here
 
     try {
-        session.startTransaction();
-
-        const order = await Order.findById(orderId).session(session);
-
-        if (!order) {
-            await session.abortTransaction();
-
-            return res.status(404).json({
-                message: "Order not found",
-                status: "Error"
-            });
-        }
-
-
-        const transaction = new Transaction({
-            order: order._id,
-            paymentMethod,
-            amount
-        });
-
-        const savedTransaction = await transaction.save({ session });
-        order.status = "paid";
-        await order.save({ session });
-
-        await session.commitTransaction();
-
-        return res.status(200).json({
-            message: "Transaction created successfully",
-            status: "Success",
-            transaction: savedTransaction
-        });
+        //Write your Code Here
     } catch (err) {
         await session.abortTransaction();
         console.log(err);
